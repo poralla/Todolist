@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+   
+
+
+   
+
+    <title>ToDoList</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body{
+            background-color:rgb(34, 152, 182);
+
+        }
+        .container{
+            max-width:320px;
+        }
+        .fa-trash{
+        cursor:pointer;
+        }
+        .filtered{
+            display:none !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="text-center text-black my-4"><br>
+<h1>TodoList</h1><br>
+<form class="search">
+    <input class="form-control" type="text" placeholder="Search a Todo">
+</form>
+</header>
+
+<ul class="todos list-group">
+    <li class="list-group-item d-flex justify-content-between">
+        <span>LIST1</span>
+    <i class="fa fa-trash-o" aria-hidden="true"></i>
+</li>
+    <li class="list-group-item d-flex justify-content-between">
+        <span>LIST2</span>
+    <i class="fa fa-trash-o" aria-hidden="true"></i>
+</li>
+    <li class="list-group-item d-flex justify-content-between">
+        <span>LIST3</span>
+    <i class="fa fa-trash-o" aria-hidden="true"></i>
+
+</li>
+
+<li class="list-group-item d-flex justify-content-between">
+    <span>LIST4</span>
+<i class="fa fa-trash-o" aria-hidden="true"></i>
+</li>
+  </ul>
+
+  <form class="add text-center my-4">
+      <label><b>Add a Todo here:</b></label>
+<input class="form-control" type="text" name="listing">
+
+</form>
+</div>
+<script>
+    const para=document.querySelector('p');
+    const addform=document.querySelector('.add');
+    const m=document.querySelector('.todos');
+    let s1=document.querySelector('.search input');
+    const template=(todo)=>{
+    const html=` <li class="list-group-item d-flex justify-content-between">
+    <span>${todo}</span>
+    <i class="fa fa-trash-o" aria-hidden="true"></i>
+    </li>`;
+    m.innerHTML+=html;
+    };
+
+    addform.addEventListener('submit',(e)=>{
+    e.preventDefault();
+    let todo=addform.listing.value.trim();
+    console.log(todo);
+    if(todo.length){
+    template(todo);
+    addform.reset();
+    }
+    })
+    var filterTodo=(p2)=>{
+    
+Array.from(m.children) 
+.filter((val)=>{
+return !val.textContent.toLowerCase().includes(p2);
+})
+.forEach(val=>{
+    val.classList.add('filtered');
+})
+Array.from(m.children) 
+.filter((val)=>{
+return val.textContent.includes(p2);
+})
+.forEach(val=>{
+    val.classList.remove('filtered');
+})
+}
+
+//KEYUP 
+s1.addEventListener('keyup',(e)=>{
+    e.preventDefault();
+    const t4=s1.value.toLowerCase().trim();
+    filterTodo(t4);
+})
+
+
+m.addEventListener('click',e=>{
+    if(e.target.classList.contains('fa-trash-o')){
+e.target.parentElement.remove();
+console.log(e.target.parentElement);
+    }
+})
+
+</script>
+ 
+   
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>
